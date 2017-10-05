@@ -5,11 +5,22 @@
 3.  Install what else? 
 */
 
+-- Enable PostGIS (includes raster)
 CREATE EXTENSION postgis;
+-- Enable Topology
 CREATE EXTENSION postgis_topology;
+-- Enable PostGIS Advanced 3D 
+-- and other geoprocessing algorithms
+-- sfcgal not available with all distributions
+CREATE EXTENSION postgis_sfcgal;
+-- fuzzy matching needed for Tiger
 CREATE EXTENSION fuzzystrmatch;
-CREATE EXTENSION postgis_tiger_geocoder;
+-- rule based standardizer
 CREATE EXTENSION address_standardizer;
+-- example rule data set
+CREATE EXTENSION address_standardizer_data_us;
+-- Enable US Tiger Geocoder
+CREATE EXTENSION postgis_tiger_geocoder;
 CREATE EXTENSION tablefunc;
 
 /*
@@ -18,7 +29,7 @@ psql -h [host] -p 5432 -U [user] -d wavf17
 CREATE SCHEMA wavf_raw
 ;
 CREATE TABLE wavf_raw.wavf
-(wavfid bigserial PRIMARY KEY
+(wavfid BIGSERIAL PRIMARY KEY
 ,statevoterid varchar(25)
 ,countyvoterid varchar(25)
 ,title varchar(10)
@@ -121,7 +132,7 @@ CREATE TABLE wavf_raw.votehistory
 ,countycode varchar
 ,statevoterid varchar
 ,electiondate varchar
-,votinghistoryid varchar
+,votinghistoryid bigint PRIMARY KEY
 )
 ;
 --
