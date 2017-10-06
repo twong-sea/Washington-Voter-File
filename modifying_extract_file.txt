@@ -1,0 +1,27 @@
+Install csvkit which will help parse the poorly formatted `[date]_VRDB_Extract.txt` file
+
+http://csvkit.readthedocs.io/en/1.0.2/tutorial/1_getting_started.html
+
+Install csvkit
+`sudo pip install csvkit`
+
+Change tab-delimited file to csv so csvkit can use it:
+`cat [date]_VRDB_Extract.txt | tr "\\t" "," > [date]_wavf_extract.csv`
+
+Use csvkit to clean the file (remove blank lines, etc)
+`csvclean [date]_wavf_extract.csv`
+
+Find lines with true errors (not blank ones but too many commas or not enough)
+`csvgrep -c 2 -r "Expected 38 columns, found 0 columns" -i top250k_err.csv > true_errors.csv`
+
+See how many rows
+
+cat true_errors.csv | wc -l
+
+If not too many then ignore
+
+If having file encoding errors check what file is encoded as:
+file -I 201709_VRDB_Extract.txt
+
+Then use incv to convert:
+iconv −f US-ASCII −t UTF−8 201709_VRDB_Extract.txt > 201709_VRDB_Extract_UTF.txt
