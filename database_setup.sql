@@ -28,6 +28,7 @@ psql -h [host] -p 5432 -U [user] -d wavf17
 */
 CREATE SCHEMA wavf_raw
 ;
+-- Use varchar for everything because errors are lame.
 CREATE TABLE wavf_raw.wavf
 (wavfid BIGSERIAL PRIMARY KEY
 ,statevoterid varchar(25)
@@ -53,8 +54,8 @@ CREATE TABLE wavf_raw.wavf
 ,countycode varchar(7)
 ,precinctcode varchar(14)
 ,precinctpart varchar(15)
-,legislativedistrict int
-,congressionaldistrict int
+,legislativedistrict varchar(7)
+,congressionaldistrict varchar(7)
 ,mail1 varchar(105)
 ,mail2 varchar(105)
 ,mail3 varchar(105)
