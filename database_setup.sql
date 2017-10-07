@@ -121,6 +121,7 @@ CREATE TABLE wavf_raw.precincts
 (countycode varchar
 ,county varchar
 ,districttype varchar
+,districtid varchar
 ,districtcode varchar
 ,districtname varchar
 ,precinctcode varchar

@@ -8,6 +8,12 @@ Install csvkit
 Change tab-delimited file to csv so csvkit can use it:
 `cat [date]_VRDB_Extract.txt | tr "\\t" "," > [date]_wavf_extract.csv`
 
+Or try using csvclean
+
+csvclean --tabs -e utf8 [filename] 
+csvclean --tabs -e ascii [filename]
+
+
 Use csvkit to clean the file (remove blank lines, etc)
 `csvclean [date]_wavf_extract.csv`
 
