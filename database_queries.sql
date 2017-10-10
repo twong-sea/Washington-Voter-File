@@ -6,7 +6,7 @@ CONCAT_WS(' '
     ,regstpredirection
     ,regstname
     ,regstpostdirection
-    ,'UNIT'
+    ,regunittype
     ,regunitnum
 	)
 ,count(*)
