@@ -14,13 +14,13 @@ CREATE TABLE wavf.addresses
 ,regunitnum varchar(15)
 ,city varchar(55)
 ,state varchar(7)
-,zip
-,county
+,zip varchar(15)
+,county varchar(55)
 ,household_size int
 ,household_lnames int)
-
+;
 INSERT INTO wavf.addresses
-(addressname,regstnum,regstfrac,regstpredirection,regstname,regsttype,regstpostdirection,regunittype,regunitnum,city,state,household_size,household_lnames)
+(addressname,regstnum,regstfrac,regstpredirection,regstname,regsttype,regstpostdirection,regunittype,regunitnum,city,state,county,household_size,household_lnames)
 SELECT 
 CONCAT_WS(' '
     ,regstnum
@@ -41,7 +41,11 @@ CONCAT_WS(' '
 	,regunitnum
 	,regcity as city
 	,regstate as state
-	,county
+	,c.county as county
+	,count(*) as household_size
+	,count(distinct lname) as household_lnames
 
-FROM wavf_raw.wavf
+FROM wavf_raw.wavf w
+LEFT JOIN wavf_raw.county c ON c.countycode=w.countycode
 WHERE statuscode='A'
+GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12
