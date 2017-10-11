@@ -20,7 +20,7 @@ CREATE TABLE wavf.addresses
 ,household_lnames int)
 ;
 INSERT INTO wavf.addresses
-(addressname,regstnum,regstfrac,regstpredirection,regstname,regsttype,regstpostdirection,regunittype,regunitnum,city,state,county,household_size,household_lnames)
+(addressname,regstnum,regstfrac,regstpredirection,regstname,regsttype,regstpostdirection,regunittype,regunitnum,city,state,zip,county,household_size,household_lnames)
 SELECT 
 CONCAT_WS(' '
     ,regstnum
@@ -41,6 +41,7 @@ CONCAT_WS(' '
 	,regunitnum
 	,regcity as city
 	,regstate as state
+	,regzipcode as zip
 	,c.county as county
 	,count(*) as household_size
 	,count(distinct lname) as household_lnames
