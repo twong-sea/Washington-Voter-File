@@ -31,13 +31,13 @@ CREATE TABLE wavf_raw.wavf -- changes in 2024 file are commented out
 ,gender varchar(6)
 ,regstnum varchar(25)
 ,regstfrac varchar(25)
-,regstname varchar(105)
+,regstname varchar(200)
 ,regsttype varchar(55)
 ,regunittype varchar(55)
 ,regstpredirection varchar(55)
 ,regstpostdirection varchar(55)
 ,regstunitnum varchar(55) -- should be regunitnum as in docs but file is mislabeled
-,regcity varchar(105)
+,regcity varchar(200)
 ,regstate varchar(15)
 ,regzipcode varchar(15)
 ,countycode varchar(7)
@@ -45,10 +45,51 @@ CREATE TABLE wavf_raw.wavf -- changes in 2024 file are commented out
 ,precinctpart varchar(25)
 ,legislativedistrict varchar(4)
 ,congressionaldistrict varchar(4)
-,mail1 varchar(105)
-,mail2 varchar(105)
-,mail3 varchar(105)
-,mailcity varchar(105)
+,mail1 varchar(200)
+,mail2 varchar(200)
+,mail3 varchar(200)
+,mailcity varchar(200)
+,mailstate varchar(7)
+,mailzip varchar(15)
+,mailcountry varchar(55)
+,registrationdate date
+--,absenteetype varchar(6)
+,lastvoted date
+,statuscode varchar(55)
+--,dflag varchar(7)
+)
+;
+CREATE TABLE wavf_raw.wavf2 -- changes in 2024 file are commented out
+(statevoterid varchar(25) PRIMARY KEY
+--,countyvoterid varchar(25)
+--,title varchar(10)
+,fname varchar(55)
+,mname varchar(55)
+,lname varchar(55)
+,namesuffix varchar(15)
+--,birthdate date
+,birthyear varchar(6) -- yearofbirth in docs
+,gender varchar(6)
+,regstnum varchar(25)
+,regstfrac varchar(25)
+,regstname varchar(200)
+,regsttype varchar(55)
+,regunittype varchar(55)
+,regstpredirection varchar(55)
+,regstpostdirection varchar(55)
+,regstunitnum varchar(55) -- should be regunitnum as in docs but file is mislabeled
+,regcity varchar(200)
+,regstate varchar(15)
+,regzipcode varchar(15)
+,countycode varchar(7)
+,precinctcode varchar(25)
+,precinctpart varchar(25)
+,legislativedistrict varchar(4)
+,congressionaldistrict varchar(4)
+,mail1 varchar(200)
+,mail2 varchar(200)
+,mail3 varchar(200)
+,mailcity varchar(200)
 ,mailstate varchar(7)
 ,mailzip varchar(15)
 ,mailcountry varchar(55)
@@ -134,4 +175,4 @@ CREATE TABLE wavf_raw.votehistory
 
 
 
-cat 20240801_VRDB_Extract.txt | parallel --header : --pipe -N799999 'cat >20240801_VRDB_Extract_{#}.txt'
+cat 20240801_VRDB_Extract.txt | parallel --header : --pipe -N250000 'cat >20240801_VRDB_Extract_{#}.txt'
